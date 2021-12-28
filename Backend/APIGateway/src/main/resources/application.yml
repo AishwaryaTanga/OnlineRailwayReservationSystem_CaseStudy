@@ -1,0 +1,57 @@
+server:
+  port: 9001
+  
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+  instance:
+    hostname: localhost
+    
+
+  
+
+  
+spring:
+  cloud:
+    gateway:
+      routes:
+      - id: AdminContact-Service
+        uri:
+          http://localhost:8888/
+        predicates:
+        - Path=/contacts/**
+        
+        
+        
+       
+      - id: TrainDetails
+        uri:
+          http://localhost:8890/
+        predicates:
+        - Path=/trains/**
+        
+        
+      - id: Booking-Order-Service
+        uri:
+          http://localhost:8889/
+        predicates:
+        - Path=/bookings/**
+        
+           
+      - id: PaymentService
+        uri:
+          http://localhost:9067/
+        predicates:
+        - Path=/**  
+        
+           
+      - id: User_login
+        uri:
+          http://localhost:8891/
+        predicates:
+        - Path=/**
+         
+        
